@@ -1,0 +1,146 @@
+
+img, embed, object, video {
+max-width:100%;
+    height:auto;
+}
+
+#logo_box
+{
+    max-width: 80px;
+    padding: 3px;
+}
+
+
+#maincontainer {
+  border: 1px solid hotpink; }
+
+article {
+  border: 1px solid green; }
+
+
+/* SOME OVERRIDES */
+
+.panel {
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.panel-body {
+  padding: 15px;
+}
+.panel-heading {
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  background-color: blue;
+}
+.panel-heading > .dropdown .dropdown-toggle {
+  color: inherit;
+}
+.panel-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: inherit;
+  text-align: center;
+}
+
+
+
+#map-canvas 
+{
+    height: 600px;
+    display: none;
+}
+
+
+#directions-canvas 
+{
+    text-align: center;
+    height: 600px;
+    display: none;  
+    /*When it comes to vertical alignment, as a few people have pointed out, the translateY() method used on the child elem of this meth below (.loading_gif) 
+    can cause elements to be blurry due to the element being placed on a “half pixel”. A solution for this is to set its parent element to preserve-3d. Like following:*/
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+
+.loading_gif
+{
+    /*We need to vertically align the loading gif img. 'text-align:center;' on the parent n 'margin:auto;' did the trick for horizontal aligning
+    But vertical alignment is a diff ball game. The following CSS property 'transform' is normally used for rotating and scaling elements, 
+    but with its translateY() func we can now vertically align elements. Usually this must be done with absolute positioning or setting line-heights, 
+    but these require you to either know the height of the element, or it only works on single-line text etc*/  
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    /*The below are resets to this css3 functionality for IE n others*/
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+}
+
+
+
+.shop
+{
+    clear: both;
+    padding: 10px;
+}
+
+
+.img_container
+{
+    border: solid 1px #000000;
+    width: 85px;
+    height: 90px;
+    overflow-y: hidden;
+    float: left;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+
+
+.detail_img_container
+{
+    border: solid 1px #000000;
+    float: left;
+    max-width: 400px; 
+    padding: 5px;
+    margin: 0 30px 0 0px;
+    border-radius: 3px;
+}
+
+
+.image
+{
+    float: left; 
+    border: solid 0.5px #00b3ee;
+}
+
+
+
+.shop_info
+{
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+
+.description
+{
+    clear: both;
+    padding-top: 20px;
+}
+
+
+.separate
+{
+    clear: both;
+    margin-top: 10px;
+}
