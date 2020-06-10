@@ -1,6 +1,6 @@
 <?php
 
-//hack filter repeated users based on their IDs
+//filter repeated users based on their IDs
 $ids = [];
 
 ?>
@@ -40,7 +40,6 @@ $ids = [];
                                 <th scope="row">{{ $user->id }}</th>
                                 <td>{{  $user->name }}</td>
                                 <td>{{  $user->email }}</td>
-                               {{-- <td>{{  implode(',', $user->roles()->get()->pluck('name')->toArray()) }}</td>--}}
                                 <td>{{  implode(',',$roles[$user->id]) }}</td>
                                 <td>
                                     <a href="{{ url("/admin/edit_users/{$user->id}/") }}">
@@ -51,7 +50,6 @@ $ids = [];
                                     <form action="{{ route("adminusers.destroy", $user->id) }}" method="POST">
                                         @csrf
                                         {{method_field('DELETE')}}
-                                        {{--<input type="hidden" name="deleteUser" value="{{ $user->id }}" />--}}
                                         @if($user->id == Auth::user()->id)
                                         <a href="#" class="btn btn-sm btn-default float-left">N/A</a>
                                         @else

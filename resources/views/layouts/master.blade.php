@@ -9,10 +9,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'ShopFinder') }}</title>
 
-
-    <!-- Scripts -->
-    {{-- <script src="{{ asset('js/lib/app.js') }}" defer></script>----------TESTING WITHOUT THIS (03/06/2020)--}}
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -67,7 +63,6 @@
 		<div class="container-fluid">
 			<div class="navbar-header pull-left">
 
-
 				<!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 					<span class="sr-only">Toggle Navigation</span>
 					<span class="icon-bar"><</span>
@@ -76,7 +71,7 @@
 				</button>-->
 
                 <!--<div id="logo_box">-->
-                    <!--<a class="navbar-brand" href="{{ url('/') }}"><img src="{{ url('images/logo.png') }}"></a>-->
+                    {{--<!--<a class="navbar-brand" href="{{ url('/') }}"><img src="{{ url('images/logo.png') }}"></a>-->--}}
                 <!--</div>-->
 			</div>
                     
@@ -207,9 +202,7 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
     <script src="{{ asset('js/lib/bootstrap.min.js') }}" type="text/javascript"></script>
-    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTZea67jn4YSPIGu0dNTHRyB1jnvo1Q00" type="text/javascript"></script>-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOC9dfqr0RzocAj6UPsyU2c9afyFUX8yc" type="text/javascript"></script><!--NEW UPDATED API KEY (03/06/2020)-->
-    <!--<script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOC9dfqr0RzocAj6UPsyU2c9afyFUX8yc" type="text/javascript"></script>
     <script src="{{ asset('js/geolocation.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/general.js') }}" type="text/javascript"></script>
 

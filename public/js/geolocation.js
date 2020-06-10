@@ -117,8 +117,7 @@
     var mapLatitude;
     var mapLongitude;
     var myLatlng;
-    //var myGoogleKey = "AIzaSyCTZea67jn4YSPIGu0dNTHRyB1jnvo1Q00";
-    var myGoogleKey = "AIzaSyBOC9dfqr0RzocAj6UPsyU2c9afyFUX8yc"; //NEW UPDATED API KEY (03/06/2020)
+    var myGoogleKey = "AIzaSyBOC9dfqr0RzocAj6UPsyU2c9afyFUX8yc"; 
 
     function getMapLocation() {
             console.log("getMapLocation");

@@ -1,6 +1,3 @@
-<?php
-
-?>
 
 @extends('layouts.master')
 
@@ -32,17 +29,6 @@
         </div>
 
         <div class="jumbotron">
-
-            <!--<p>Geolocation</p>
-            <div class="well" id="geoLocation"><small>Make sure you have location services turned on in your device. If it doesn't work at first, refresh the page and try again...</small></div>
-
-
-            <div id="buttons">
-                <button class="btn btn-primary" id="getGeolocation">Get your geolocation</button>
-                <button class="btn btn-primary" id="getYourSpot">Get your spot on the map</button>
-                <button title="Make sure you have location services turned on in your device" class="btn btn-primary" id="getDirections">Get directions to nearest shop</button>
-            </div> -->
-
             <div class="row">
 
                 <div class="col-md-10 col-md-offset-1">
@@ -75,15 +61,15 @@
                                     </div><!--End class 'shop_info'-->
                                 </div><!--End class 'shop'-->
                             <div style="margin-top:5px;">
-                            <a href="{{ url("/admin/edit_shop/{$shops[$x]->id}/") }}">
-                            <button type="button" style="height:30px;" class="btn btn-primary float-left">Edit</button>
-                            </a>
-
-                            <form action="{{url("admin/shops/{$shops[$x]->id}/")}}" method="POST" id="delete_user_form">
-                            @csrf
-                            {{method_field('DELETE')}}
-                            <button id="delete_user" style="height:30px;" onclick="confirmDelete(event)" type="submit" class="btn btn-sm btn-danger float-left">Delete</button>
-                            </form>
+                                <a href="edit_shop/<?=$shops[$x]->id?>">
+                                    <button type="button" style="height:30px;" class="btn btn-primary float-left">Edit</button>
+                                </a>
+                                    {{--<a href="{{ url("/admin/edit_shop/{$shops[$x]->id}/") }}">--}}
+                                <form action="{{ url("admin/shops/{$shops[$x]->id}")}}" method="POST" id="delete_shop_form{{$x}}">
+                                    @csrf
+                                    {{method_field('DELETE')}}
+                                    <button  name="{{$shops[$x]->name}}" id="{{$x}}" style="height:30px;" type="submit" class="btn btn-sm btn-danger float-left delete_shop">Delete</button>
+                                </form>
                             </div>
 
                             <!--</a>-->
@@ -104,5 +90,27 @@
             </div><!--End of row-->
         </div><!--jumbotron-->
     </div><!--End fluid body container-->
+    @endsection
+
+    @section('rawJS')
+    <script type="text/javascript">
+
+        $(document).on('click', '.delete_shop', function(e) {
+            e.preventDefault();
+            let btnId = this.id;
+
+            let form = $('#delete_shop_form'+btnId);
+
+            //Confirm if they really want to delete the img
+            let conf = confirm('Are you sure you want to delete this shop');
+            if (conf == false) {
+                return false;
+            }
+            else {
+                form.submit();
+            }
+        });
+
+    </script>
     @endsection
 

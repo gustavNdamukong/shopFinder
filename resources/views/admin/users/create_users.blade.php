@@ -1,13 +1,3 @@
-<?php
-
-//hack filter repeated users based on their IDs
-//$ids = [];
-
-/*'user' => $user,
-            'usersRoles' => $usersRoles,
-            'allRoles' => $roles
-*/
-?>
 
 @extends('layouts.master')
 

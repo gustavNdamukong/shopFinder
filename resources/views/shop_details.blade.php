@@ -5,10 +5,8 @@ $imgNum = 0;
 define('IMGS_PER_SLIDE', 4);
 // initialize a counter variable for the image loop
 $imgsCount = count($shopImages);
+?>
 
-    ?>
-
-{{-- @extends('layouts.shopFinderLayout') --}}
 @extends('layouts.master')
 
 

@@ -53,37 +53,6 @@
                                 <input type="text" id="lon" name="lon" class="form-control" />
                             </div>
 
-                            {{--<div class="form-text form-group">
-                                <label for="user_id">Created by</label>
-                                <input type="text" id="user_id" name="user_id" value="{{ Auth::user()->id }} " class="form-control" readonly/>
-                            </div>--}}
-
-
-                            {{--<table class="table">
-                                <thead>
-                                    <th>Image name</th>
-                                    <th>Image</th>
-                                    <th colspan="2" style="text-align:center;">Action</th>
-                                </thead>
-                                <tbody>
-                                <?php $rowNum = 0; ?>
-                                @if($imgCount > 0)
-                                @foreach($shopImages as $key => $image)
-                                    <tr>
-                                        <td>{{ $image }}</td>
-                                        <td><img src="{{ asset('images/store_imgs/'.$image) }}" width="100" height="100" /></td>
-                                        <td><button id="{{$key}}" class="btn btn-xs btn-danger deleteBtn">Delete</button></td>
-                                        @if($rowNum == 0)
-                                            <td><button id="editImgBtn" onclick="showImgUpload(event)" class="btn btn-sm btn-warning" style="margin-top:{{($imgCount*100)/2}}px;" rowspan="{{ $imgCount }}">Add images</button></td>
-                                            <?php $rowNum++; ?>
-                                        @endif
-                                    </tr>
-                                @endforeach
-                                @else
-                                    <td><button id="editImgBtn" onclick="showImgUpload(event)" class="btn btn-sm btn-warning" style="margin-top:{{($imgCount*100)/2}}px;" rowspan="{{ $imgCount }}">Add images</button></td>
-                                @endif
-                                </tbody>
-                            </table>--}}
                             <div class="form-text form-group">
                                 <label for="addImgBtn">Images - (<small>Optional</small>)</label>
                                 <br />

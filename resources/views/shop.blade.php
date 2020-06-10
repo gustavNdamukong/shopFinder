@@ -2,20 +2,11 @@
 
 ?>
 
-{{-- @extends('layouts.shopFinderLayout') --}}
 @extends('layouts.master')
 
 
     @section('content')
 
-
-    {{--<style>
-        ul .lon, ul .lat, ul .address, ul .postcode, ul .location
-        {
-
-        }
-
-    </style>--}}
 
 
     <div class="container">
@@ -32,7 +23,6 @@
 
             <p>Geolocation</p>
             <div class="well" id="geoLocation">
-                <!--<h3 id="nearestShopName" style="display:none;"></h3>-->
                 <small>Make sure you have location services turned on in your device. If it doesn't work at first, refresh the page and try again...</small>
             </div>
 

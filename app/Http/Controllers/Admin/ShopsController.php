@@ -59,8 +59,6 @@ class ShopsController extends Controller
 
     public function saveShop(Request $request)
     {
-        /////echo '<pre>';
-        /////die(print_r($request->all()));
         $request->validate([
             'name' => 'required',
             'city' => 'required',
@@ -143,7 +141,6 @@ class ShopsController extends Controller
             where s.id = $shopId"));
 
         //get the shop images into a separate array, this is coz the same shop rec was repeated for every shop image
-        //echo '<pre>';die('NO IMAGES '.print_r($shop));
         $shopImages = [];
         if (count($shop) >= 1) {
             foreach ($shop as $sho) {
@@ -163,7 +160,6 @@ class ShopsController extends Controller
 
     public function deleteShopImgAjaxPost(Request $request)
     {
-        $imageId = $request->imageId;
         $imageName = $request->imageName;
         $destinationPath = 'images/store_imgs';
 
@@ -177,7 +173,11 @@ class ShopsController extends Controller
 
 
 
-
+    /*
+     * Update a shop's data. Note that while we upload any new images submitted, we do not remove any prev images
+     * as we already have another method to remove individual messages (deleteShopImgAjaxPost())
+     *
+     */
     public function update(Request $request)
     {
         //Update the shop
@@ -198,10 +198,6 @@ class ShopsController extends Controller
         if ($request->hasFile('fileUpload')) {
             //Specify file upload path
             $destinationPath = 'images/store_imgs';
-
-            //TODO: We do not remove all prev imgs as planned coz we now have another separate meth for deleting indivi imgs
-            /*$res = Shop_image::where('shop_id', $request->shopId)->delete();
-            unlink($destinationPath.'/'.$request['origi_img']);*/
 
             // rename the file,
             // Insert the new images in DB &
@@ -225,6 +221,34 @@ class ShopsController extends Controller
         }
 
         flash('The shop was updated successfully')->success();
+        return redirect('admin/shops');
+    }
+
+
+
+
+
+
+    public function destroy(Shop $shop)
+    {
+        //Grab all names of imgs of this shop
+        $images = Shop_image::select('image_name')
+            ->where('shop_id', '=', $shop->id)
+            ->get()->toArray();
+
+        //If any images, remove the imgs from the DB and from filesystem
+        if (!empty($images)) {
+            $destinationPath = 'images/store_imgs';
+            foreach ($images as $image) {
+                unlink($destinationPath . '/' . $image['image_name']);
+                Shop_image::where('shop_id', $shop->id)->delete();
+            }
+        }
+
+        //delete the shop
+        $shop->delete();
+
+        flash('The shop was deleted successfully')->success();
         return redirect('admin/shops');
     }
 

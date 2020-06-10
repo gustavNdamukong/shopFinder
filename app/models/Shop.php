@@ -109,7 +109,7 @@ class Shop extends Model
 
 
 
-    public function getPaginated($howMany = 2)
+    public function getPaginated($howMany = 4)
     {
         $collection = Shop::paginate($howMany);//->toArray(); let's try getting an obj coz the LV paginator doesn't seem to work with arrays
 
