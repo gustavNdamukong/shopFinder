@@ -8,6 +8,8 @@ use App\Models\Shop;
 use App\Models\Shop_image;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use DGZ_Uploader\DGZ_Uploader;
+use Carbon\Carbon;
 
 class ShopsController extends Controller
 {
@@ -82,6 +84,8 @@ class ShopsController extends Controller
         $shop->lat = $request->lat;
         $shop->lon = $request->lon;
         $shop->user_id = $request->user_id;
+        $shop->created_at = \Carbon\Carbon::now();
+        $shop->updated_at = \Carbon\Carbon::now();
 
         $saved = $shop->save();
 
@@ -89,33 +93,38 @@ class ShopsController extends Controller
             $shop_id = $shop->id;
 
             //If there are images; rename them,
-            // save their names to DB and
-            //upload them to filesystem
+            //upload them to filesystem and
+            // save their names to DB
             if ($request->hasFile('fileUpload')) {
+                $filesUploaded = false;
                 //Specify file upload path
-                $destinationPath = 'images/store_imgs';
+                /////$destinationPath = 'images/store_imgs';
+                $upload = new \DGZ_Uploader\DGZ_Uploader('default');
 
-                foreach ($request->fileUpload as $file) {
+                // move the newly uploaded file to the upload path
+                $upload->move();
 
-                    // get the image extension
-                    $extension = $file->getClientOriginalExtension();
+                $filenames = $upload->getFilenames();
 
-                    // rename the image
-                    $filename = rand(11111,99999).'.'.$extension;
-
-                    //save the filename to DB
-                    DB::table('shop_images')->insert(array('shop_id' => $shop_id, 'image_name' => $filename));
-
-                    //TODO: Implement image resizing before uploading
-                    // move the newly uploaded file to the upload path
-                    $file->move($destinationPath, $filename);
+                if ($filenames)
+                {
+                    $filesUploaded = true;
+                    foreach ($filenames as $file) {
+                        //Only save the filename to DB after it has been uploaded
+                        DB::table('shop_images')->insert(array('shop_id' => $shop_id, 'image_name' => $file, 'created_at' => now(), 'updated_at' => now()));
+                    }
                 }
+                else { $filesUploaded = false;}
             }
 
             //done
-            flash("The shop {$request->name} was created successfully")->success();
+            if ($filesUploaded == true) {
+                flash("The shop {$request->name} was created successfully")->success();
+            }
+            else {
+                flash("The shop {$request->name} was created but something was wrong with the images")->success();
+            }
             return redirect('admin/shops');
-
         }
     }
 

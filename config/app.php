@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        DGZ_Uploader\DGZ_UploaderServiceProvider::class,
 
         /*
          * Application Service Providers...
