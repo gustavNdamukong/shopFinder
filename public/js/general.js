@@ -1,6 +1,6 @@
 /*!
  * Author Gustav
- * Copyright Gustav Digitals
+ * Copyright Gustav Ndamukong
  */
 
 /*!
@@ -11,7 +11,7 @@
    
 $(document).on('click', '#delete_btn', function(e)
 {
-    return confirm('Are you sure you want to delete this restaurant? This action cannot be reversed!');
+    return confirm('Are you sure you want to delete this feed? This action cannot be reversed!');
     e.preventDefault();
 });
 

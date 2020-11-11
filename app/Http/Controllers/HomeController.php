@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Shop_image;
+
 use Illuminate\Http\Request;
-use \App\Models\Shop;
+use \App\Models\Feed;
 
 class HomeController extends Controller
 {
@@ -28,13 +28,13 @@ class HomeController extends Controller
     public function index()
     {
         //here we get all the existing shops to display on the home page
-        $shop = new Shop();
+        $feed = new Feed();
 
         // but first convert the collection into an array
         //$shops = $shop::all()->toArray(); //decided to keep this as an obj so i could use LV's paginator, wh only works with objects
-        $shops = $shop->getPaginated();
+        $feeds = $feed->getPaginated();
 
-        return view('shop')->with('shops', $shops);
+        return view('feed')->with('feeds', $feeds);
     }
 
 
@@ -44,26 +44,17 @@ class HomeController extends Controller
      * Show the page with details of a specific store.
      *
      */
-    public function showStorePage($id)
+    public function showFeedPage($id)
     {
-        $shops = new Shop;
+        $feeds = new Feed;
 
-        $shopImages = [];
+        //$shopImages = [];
 
-        //Do an eloquent left join on the Shop and Shop_image models to get the many images associated with any given shop
-        $shopAndImages = $shops::where('shops.id', $id)
-            ->leftJoin('shop_images', 'shops.id', '=', 'shop_images.shop_id')
-            ->select('shops.name','shops.city','shops.postcode','shops.address','shops.description','shop_images.image_name')->get();
 
-        //first of all check that the image array of the first element is not empty as that will still be passed thru as having content even if it's empty, and that
-        //will mess up the count when displaying the image thumbnails
-        if (!empty($shopAndImages[0]->image_name)) {
-            foreach ($shopAndImages as $img) {
-                array_push($shopImages, $img->image_name);
-            }
-        }
+        $feed = $feeds::where('feeds.id', $id)
+            ->select('feeds.url')->get();
 
-        return view('shop_details')->with(['shop' => $shopAndImages, 'shopImages' => $shopImages]);
+        return view('feed_details')->with(['feed' => $feed]);
     }
 
 

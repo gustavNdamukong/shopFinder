@@ -18,7 +18,7 @@ class CreateShopImagesTable extends Migration
             //the two entries below are the best way to reference a foreign key n set up reference constraints
             //you must first of all create the fk field before declaring it as a fk
             $table->integer('shop_id')->unsigned();
-            $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
+            $table->foreign('shop_id')->references('id')->on('feeds')->onDelete('cascade');
             $table->string('image_name');
             $table->timestamps();
         });

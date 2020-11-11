@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'shopFinder'),
+    'name' => env('APP_NAME', 'crowdProp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -165,7 +165,6 @@ return [
         /*
          * Package Service Providers...
          */
-        DGZ_Uploader\DGZ_UploaderServiceProvider::class,
 
         /*
          * Application Service Providers...

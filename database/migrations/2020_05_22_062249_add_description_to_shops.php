@@ -13,7 +13,7 @@ class AddDescriptionToShops extends Migration
      */
     public function up()
     {
-        Schema::table('shops', function (Blueprint $table) {
+        Schema::table('feeds', function (Blueprint $table) {
             $table->text('description');
         });
     }
@@ -25,7 +25,7 @@ class AddDescriptionToShops extends Migration
      */
     public function down()
     {
-        Schema::table('shops', function (Blueprint $table) {
+        Schema::table('feeds', function (Blueprint $table) {
             $table->dropColumn('description');
         });
     }

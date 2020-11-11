@@ -76,23 +76,23 @@
 			</div>
                     
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav navbar-left">
+                            {{--<ul class="nav navbar-nav navbar-left">
                                 <li><a class="navbar-brand" href="{{ url('/') }}"><img src="{{ asset('images/logo.png') }}" width="80" height="80"></a></li>
-                            </ul>
+                            </ul>--}}
                             @if (Auth::user())
                             <ul class="nav navbar-nav navbar-left">
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Manage Shops <span></span></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Manage Stuff <span></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="{{ url('/home') }}">Shops</a></li>
-                                        <li><a href="#">Your favourite Shops <small>(coming soon)</small></a></li>
+                                        <li><a href="{{ url('/home') }}">Feeds</a></li>
+                                        <li><a href="#">Your favourite Feeds <small>(coming soon)</small></a></li>
                                         @if(Auth::user()->hasRole('super-admin'))
                                         <li><a href="{{ url('admin/users') }}">Manage users</a></li>
                                         <li><a href="{{ url('admin/create_user') }}">Create users</a></li>
                                         @endif
                                         @if(Auth::user()->hasAnyRoles(['super-admin','admin']))
-                                        <li><a href="{{ url('admin/shops') }}">Manage Shops</a></li>
-                                        <li><a href="{{ url('admin/create_shop') }}">Create new Shop</a></li>
+                                        <li><a href="{{ url('admin/feeds') }}">Manage Feeds</a></li>
+                                        <li><a href="{{ url('admin/create_feed') }}">Create new Feed</a></li>
                                         @endif
                                     </ul>
                                 </li>

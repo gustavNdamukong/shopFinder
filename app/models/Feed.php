@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Feed extends Model
@@ -50,8 +50,11 @@ class Feed extends Model
 
     public function getPaginated($howMany = 4)
     {
-        $collection = Feed::paginate($howMany);//->toArray(); let's try getting an obj coz the LV paginator doesn't seem to work with arrays
-
+        $collection = [];
+        if (isset(Auth::user()->id)) {
+            $collection = $shops = Feed::where('user_id', '=', Auth::user()->id)->paginate();
+            return $collection;
+        }
         return $collection;
     }
 

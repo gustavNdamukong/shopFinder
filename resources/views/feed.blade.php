@@ -11,9 +11,6 @@
 
     <div class="container">
 
-        <h2 style="text-align: center;">Welcome to the Shop Finder app</h2>
-
-
         <div class="jumbotron" id="map-canvas"></div>
 
         <div class="jumbotron" id="directions-canvas"></div>
@@ -21,28 +18,35 @@
 
         <div class="jumbotron">
 
-            <p>Feeds</p>
-
             <div class="row">
 
                 <div class="col-md-10 col-md-offset-1">
                     <div class="panel panel-default">
-                        <div class="panel-heading"><h4>Our list of awesome shop branches</h4></div>
+                        <div class="panel-heading"><h1 style="text-align: center;">Your RSS Feeds</h1></div>
                         <div class="panel-body">
-                            <p>Showing {!! $shops->firstItem() !!} to {{ $shops->lastItem() }} of {{ $shops->total() }} shops</p>
-
-                            @for($x = 0; $x < count($shops); $x++)
-                            <a href="{{ url('store_details/'.$shops[$x]->id) }}">
+                            @if($feeds)
+                            @for($x = 0; $x < count($feeds); $x++)
+                            <a href="{{ url('feed_details/'.$feeds[$x]->id) }}">
                                 <div class="shop">
-                                    <div class='img_container'>
-                                        {{--<div class="image">
-                                            <img src="{{ empty($shops[$x]->shop_image->pluck('image_name')[0]) ?
-                                                asset('images/store_imgs/1.png') :
-                                                asset('images/store_imgs/'.$shops[$x]->shop_image->pluck('image_name')[0]) }}" />
-                                        </div> --}}
-                                    </div>
                                     <div class="shop_info">
-                                        <div class="description">{{ $shops[$x]->url }}</div>
+                                        <div class="description">
+                                            @if(@simplexml_load_file($feeds[$x]->url))
+                                                {{$feed = simplexml_load_file($feeds[$x]->url)}}
+                                            @else
+                                                {{$invalidurl = true}}
+                                                {{"<h2>Invalid RSS Feed URL.</h2>"}}
+                                            @endif
+
+                                            @if(!empty($feed))
+                                                {{$title = $feed->channel->title}}
+                                                <h4>Number of stories: {{count($feed->channel->item)}}</h4>
+                                            @else
+                                                @if(!$invalidurl)
+                                                    {{ "<h2>You have no feeds yet</h2>" }}
+                                                @endif
+                                            @endif
+
+                                        </div>
                                     </div><!--End class 'shop_info'-->
                                 </div><!--End class 'shop'-->
                             </a>
@@ -51,9 +55,15 @@
                             @endfor
 
                             <div class='nav-links'>
-                                {!! $shops->render() !!}
+                                {!! $feeds->render() !!}
                             </div>
-
+                            @else
+                                <h2>You must be logged in to view your feeds</h2>
+                            @endif
+                            @if((!is_array($feeds)) && ($feeds->toArray()['total'] === 0))
+                                <h2>You don't have any feeds yet</h2>
+                                    <li><a href="{{ url('admin/create_feed') }}">Create new Feed</a></li>
+                            @endif
                         </div><!--End panel body-->
                     </div><!--End panel panel-default-->
                 </div><!--End of row (col-md-10)-->

@@ -13,7 +13,7 @@ class CreateShopsTable extends Migration
      */
     public function up()
     {
-        Schema::create('shops', function (Blueprint $table) {
+        Schema::create('feeds', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('city');
@@ -35,13 +35,13 @@ class CreateShopsTable extends Migration
      */
     public function down()
     {
-        Schema::table('shops', function(Blueprint $table)
+        Schema::table('feeds', function(Blueprint $table)
         {
             //need to drop the fk field first, and the index, before dropping the column
             $table->dropForeign('shops_user_id_foreign');
             $table->dropColumn('user_id');
         });
 
-        Schema::dropIfExists('shops');
+        Schema::dropIfExists('feeds');
     }
 }

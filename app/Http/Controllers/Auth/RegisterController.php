@@ -72,7 +72,8 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $role = Role::select('id')->where('name', 'user')->first();
+        //automatically make the newly registered user an admin user
+        $role = Role::select('id')->where('name', 'admin')->first();
         $user->roles()->attach($role);
 
         return $user;
